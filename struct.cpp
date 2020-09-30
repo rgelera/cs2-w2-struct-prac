@@ -9,9 +9,7 @@ struct Time {
   string period; // AM or PM
 };
 
-void printTime(Time &currentTime) {
-  cout << "Time: ";
-  if (currentTime.hour < 10) cout << "0";
+void printTime(Time currentTime) {
   cout << currentTime.hour << ":";
   if (currentTime.minute < 10) cout << "0";
   cout << currentTime.minute << ":";
@@ -34,9 +32,18 @@ void addHour(Time &currentTime) {
   if (currentTime.hour == 12) changePeriod(currentTime);
 }
 
+Time getEastern(Time pacificTime) {
+  for (int i=0; i<3; i++) {
+    addHour(pacificTime);
+  }
+  return pacificTime;
+}
+
 int main(int argc, char** argv) {
   Time time1 = {6, 0, 0, "AM"};
   Time time2 = {11, 30, 0, "PM"};
+
+  Time pacificTime = {9, 0, 0, "AM"};
 
   printTime(time1);
   addHour(time1);
@@ -45,6 +52,9 @@ int main(int argc, char** argv) {
   printTime(time2);
   addHour(time2);
   printTime(time2);
+
+  printTime(pacificTime);
+  printTime(getEastern(pacificTime));
 }
 
 
